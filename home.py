@@ -7,11 +7,12 @@
 from flask import Flask, request, render_template
 import requests
 from urllib import urlencode
-#this is way you are able to import different modules and libraries to use
-app = Flask("safe_spot")
+app = Flask("safe_spot_app")
+
+#top default section
 
 @app.route("/")
-#this defines a route for the default page when you get to this part in your app url...run the following
+#this defines a route for the default page when you get to this part in your app url
 def hello():
     return render_template("home.html")
 
@@ -20,7 +21,10 @@ def hello():
 def home_someone(name):
     return render_template("home.html", name=name.title())
 
-#to enter the user_spot
+#section for user to input address
+#work out how to link user input for parameters into Google Maps Static API URL
+
+#OPTION 1:
 @app.route("/maps.googleapis.com/maps/api/staticmap?center=<user_spot>&size=640x400&style=element:labels|visibility:off&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyAGCXXvra_pUEjBTEz92VUgAbno-8L4o9c", methods=['POST'])
 def user_spot():
     print request.form
@@ -31,13 +35,41 @@ def user_spot():
 #to return the google static url with chosen place in
     return "All OK"
 
+#OPTION 2:
+payload = {"/maps.googleapis.com/maps/api/staticmap?", {'center':'user_spot', 'zoom':'16', 'size':'400x400','markers':'[set marker one]|[set marker two]', 'key':'AIzaSyAGCXXvra_pUEjBTEz92VUgAbno-8L4o9c'}
+r = requests.get('http://maps.googleapis.com/maps/api/staticmap?', params=payload)
+print(r.url)
 
-def user_spot_map(Place):
-    #how to take the user address, and return it in the address?
-    return render_template("welcome.html", Place=Place.title())
+#OPTION 3:
+@app.route("/maps.googleapis.com/maps/api/staticmap?center=<user_spot>&size=640x400&style=element:labels|visibility:off&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyAGCXXvra_pUEjBTEz92VUgAbno-8L4o9c", methods=['POST'])
+def user_spot():
+    url = "http:///maps.googleapis.com/maps/api/staticmap?center="+str(user_spot[0])+"&size=640x400&style=element:labels|visibility:off&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyAGCXXvra_pUEjBTEz92VUgAbno-8L4o9c"
+    i=0
+    print request.form
+    form_data = request.form
+    print form_data['Place']
+#to put the user's address here
+    user_spot_map(form_data['Place'])
+#to return the google static url with chosen place in
+    return url
+
+#OPTION 4:
+def _request(self,"/maps.googleapis.com/maps/api/staticmap?",{'center':'user_spot', 'zoom':'16', 'size':'400x400','markers':'[set marker one]|[set marker two]', 'key':'AIzaSyAGCXXvra_pUEjBTEz92VUgAbno-8L4o9c'}, first_request_time=None,retry_counter=0,
+        base_url=localhost:5000,accepts_clientid=True,
+        extract_body=None, requests_kwargs=None, post_json=None):
+
+authed_url = self._generate_auth_url(url, params, accepts_clientid)
+
+ requests_method = self.session.get
+        if post_json is not None:
+            requests_method = self.session.post
+            final_requests_kwargs["json"] = post_json
+        try:
+            response = requests_method(base_url + authed_url,
+                                       **final_requests_kwargs)
 
 
-#-----
+#--------------------------
 
 #set up the email contact
 def send_simple_message(email):

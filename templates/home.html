@@ -1,44 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" type="text/css" href="static/css/home.css">
-
+<noscript>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+</noscript>
 <title>Safe Spot</title>
 </head>
 
+<body>
+
 {% if name %}
-  <h1>Hello {{ name }}. Welcome to your safe spot</h1>
+  <h1>Hello {{ name }} <br> Let's find you a safe spot</h1>
 {% else %}
-  <h1> Hello. Welcome to your safe spot</h1>
+  <h1> Hello. Let's find you a safe spot</h1>
 {% endif %}
 
-  <body class="top">
-    <header class="container">
-      <section class="container">
-        <h1>
-          <div id="user-spot">
-          <form method="post" action="/maps">
-              <label for="Place">Your Location: </label>
-              <input type ="text" id="Place" Place="Place" value=""placeholder="place" required="
+  <h4>
+  <header class="container">
+      <div id="user-spot">
+        <form method="post" action="/maps">
+              <label for="Place"></label>
+              <input type ="text" id="Place" Place="Place" value=""placeholder="current location" required="
               required" autofocus="autofocus" />
               <input type="submit" value="Go" id="submit-button" />
             </form>
           </div>
-        </h1>
-    </header>
+   </h4>
+  </header>
 
-    <section class="container" class="share container">
-      <a class="btn btn-alt" href="contactme.html">Share your safe spot</a>
-    </section>
-
-    <footer class="container">
-      <nav>
-        <a href="home.html">Home</a>
-      </nav>
-      <small>&#9757; Lottie Swift</small>
-    </footer>
-
-
+  <footer class="container">
+    <a class="btn btn-alt" href="contactme.html">Share your Safe Spot</a><br>
+    <a class="btn btn-alt" href="contactme.html">Advice</a>
+    <small>&#9757; Lottie Swift Inc.</small>
+  </footer>
 
   </body>
 </html>
