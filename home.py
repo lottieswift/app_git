@@ -1,19 +1,4 @@
-#App Page
-
-#build welcome page with name
-#build entry for location
-#this needs to link to url
-
-from flask import Flask, request, render_template
-import requests
-from urllib import urlencode
-app = Flask("safe_spot_app")
-
-#top default section
-
-@app.route("/")
-#this defines a route for the default page when you get to this part in your app url
-def hello():
+ef hello():
     return render_template("home.html")
 
 @app.route("/<name>")
