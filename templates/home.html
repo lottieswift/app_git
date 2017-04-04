@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<noscript>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
-</noscript>
+<link rel= "stylesheet" type= "text/css" href= "static/css/home.css">
 <title>Safe Spot</title>
 </head>
 
 <body>
-
+<h1>
 {% if name %}
-  <h1>Hello {{ name }} <br> Let's find you a safe spot</h1>
+  Hello {{ name }} <br> Let's find you a safe spot
 {% else %}
-  <h1> Hello. Let's find you a safe spot</h1>
+  Hello <br> Let's find you a safe spot
 {% endif %}
+</h1>
 
-  <h4>
-  <header class="container">
-      <div id="user-spot">
-        <form method="post" action="/maps">
-              <label for="Place"></label>
-              <input type ="text" id="Place" Place="Place" value=""placeholder="current location" required="
-              required" autofocus="autofocus" />
-              <input type="submit" value="Go" id="submit-button" />
-            </form>
-          </div>
+<h4>
+    <div>
+        <form method="post" action="http://127.0.0.1:5000/safe_spot">
+            <input type="text" id="Place" name="Place" value="" placeholder="current location" required=/>
+            <input type="submit" value=">" />
+        </form>
+    </div>
    </h4>
-  </header>
 
-  <footer class="container">
-    <a class="btn btn-alt" href="contactme.html">Share your Safe Spot</a><br>
-    <a class="btn btn-alt" href="contactme.html">Advice</a>
-    <small>&#9757; Lottie Swift Inc.</small>
+  <footer>
+    <small>&#9757; Lottie Swift Inc.&#9757;</small>
   </footer>
 
   </body>

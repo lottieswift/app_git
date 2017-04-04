@@ -4,9 +4,10 @@
 #build entry for location
 #this needs to link to url
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 import requests
 from urllib import urlencode
+
 app = Flask("safe_spot_app")
 
 #top default section
@@ -21,22 +22,15 @@ def hello():
 def home_someone(name):
     return render_template("home.html", name=name.title())
 
-url = "/maps.googleapis.com/maps/api/staticmap?center=<user_spot>&size=640x400&style=element:labels|visibility:off&style=element:geometry.stroke|visibility:off&style=feature:landscape|element:geometry|saturation:-100&style=feature:water|saturation:-100|invert_lightness:true&key=AIzaSyAGCXXvra_pUEjBTEz92VUgAbno-8L4o9c"
-
-#OR THIS....??
-payload = {"/maps.googleapis.com/maps/api/staticmap?", {'center':'user_spot', 'zoom':'16', 'size':'400x400','markers':'[set marker one]|[set marker two]', 'key':'AIzaSyAGCXXvra_pUEjBTEz92VUgAbno-8L4o9c'}
-r = requests.get('http://maps.googleapis.com/maps/api/staticmap?', params=payload)
-print(r.url)
-
-@app.route("/url", methods=['POST'])
+@app.route("/safe_spot", methods=['POST'])
 def user_spot():
     print request.form
     form_data = request.form
-    print form_data['Place']
-#to put the user's address here
-    x = user_spot_map(form_data['Place'])
-    print x
-    return x
+    place_data = form_data['Place']
+    new_url = "https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=400x400&maptype=terrain&markers=color:blue%7Clabel:S%7C51.483785,-0.099857&markers=color:blue%7Clabel:S%7C51.481918,-0.099968&markers=color:blue%7Clabel:S%7C51.486224,-0.100990&center=" + place_data
+    #new url is constructed with place_data
+    return redirect(new_url, code=302)
+    #302 as redirect code
 
 app.run(
     debug= True

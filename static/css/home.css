@@ -1,27 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+* {
+  text-align: center;
+  font-family: Lato;
+}
+
 h1 {
-    font-family: helvetica;
+    color: white;
     text-align: center;
-    display: block;
     font-size: 2em;
-    -webkit-margin-before: 0.67em;
-    -webkit-margin-after: 0.67em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
     font-weight: bold;
 }
 
 body {
     background-color: powderblue;
-    background-image: url(static/images/background.jpg)
+
   }
 
 h4 {
-  font-family: helvetica;
   text-align: center;
-  display: block;
-  font-size: 0.5em;
-  -webkit-margin-before: 0.67em;
-  -webkit-margin-after: 0.67em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
+}
+
+footer {
+  font-family: helvetica;
+  color: white;
 }
